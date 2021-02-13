@@ -1,37 +1,145 @@
-## Welcome to GitHub Pages
+<html>
+    <head>
+        <title>Door test</title>
+    </head>
+    <body>
+	<model-viewer id="reveal" interaction-prompt="none" autoplay loading="eager" ios-src="./assets/scene.usdz#applePayButtonType=buy&checkoutTitle=Wooden%20Door&checkoutSubtitle=Rustic%20finish&price=$150" src="./assets/scene.gltf" ar ar-modes="webxr scene-viewer quick-look" ar-scale="auto" camera-controls alt="A 3D model of a door">
+		<button slot="ar-button" style="width:25%; height: 15vh; font-size:40px; background-color: white; border-radius: 4px; border: none; position: absolute; top: 32px; right: 32px; background-image: url(./assets/ic_view_in_ar_new_googblue_48dp.png)">
+			Activate AR
+		</button>
+	</model-viewer>    
+	<div class="slider">
+		<div class="slides">
+		</div>
+	</div>
+	<script type="module">
+	  const modelViewer = document.querySelector("model-viewer");
 
-You can use the [editor on GitHub](https://github.com/Justsleeping182/Justsleeping182/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
+	  function sleep(ms) {
+	    return new Promise(resolve => setTimeout(resolve, ms));
+	  }
+		
+	  window.switchSrc = (element, name) => {
+	    const base = "./assets/" + name + "/" + name;
+	    modelViewer.src = base + '.gltf';
+	    //modelViewer.iossrce = base + '.usdz';
+	    const slides = document.querySelectorAll(".slide");
+	    slides.forEach((element) => {element.classList.remove("selected");});
+	    element.classList.add("selected");
+	    console.log(modelViewer.animationName);
+	    modelViewer.play();
+	  };
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+	
+	</script>
 
-### Markdown
+	<style>
+	  /* This keeps child nodes hidden while the element loads */
+	  :not(:defined) > * {
+	    display: none;
+	  }
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+	  model-viewer {
+	    background-color: #222222;
+	    --poster-color: #eee;
+	    width:100%;
+	    height:100vh;
+	  }
 
-```markdown
-Syntax highlighted code block
+	  model-viewer#reveal {
+	    --poster-color: transparent;
+	  }
+		
+	  #ar-button {
+	    background-image: url(./assets/ic_view_in_ar_new_googblue_48dp.png);
+	    background-repeat: no-repeat;
+	    background-size: 20px 20px;
+	    background-position: 12px 50%;
+	    background-color: #fff;
+	    position: absolute;
+	    left: 50%;
+	    transform: translateX(-50%);
+	    white-space: nowrap;
+	    bottom: 132px;
+	    padding: 0px 16px 0px 40px;
+	    font-family: Roboto Regular, Helvetica Neue, sans-serif;
+		font-size:40px;
+	    color:#4285f4;
+	    line-height: 36px;
+	    border-radius: 18px;
+	    border: 1px solid #DADCE0;
+	  }
 
-# Header 1
-## Header 2
-### Header 3
+	  #ar-button:active {
+	    background-color: #E8EAED;
+	  }
 
-- Bulleted
-- List
+	  #ar-button:focus {
+	    outline: none;
+	  }
 
-1. Numbered
-2. List
+	  #ar-button:focus-visible {
+	    outline: 1px solid #4285f4;
+	  }
 
-**Bold** and _Italic_ and `Code` text
+	  @keyframes circle {
+	    from { transform: translateX(-50%) rotate(0deg) translateX(50px) rotate(0deg); }
+	    to   { transform: translateX(-50%) rotate(360deg) translateX(50px) rotate(-360deg); }
+	  }
 
-[Link](url) and ![Image](src)
-```
+	  @keyframes elongate {
+	    from { transform: translateX(100px); }
+	    to   { transform: translateX(-100px); }
+	  }
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
 
-### Jekyll Themes
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/Justsleeping182/Justsleeping182/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+	  .slider {
+	    width: 100%;
+	    text-align: center;
+	    overflow: hidden;
+	    position: absolute;
+	    bottom: 16px;
+	  }
 
-### Support or Contact
+	  .slides {
+	    display: flex;
+	    overflow-x: auto;
+	    scroll-snap-type: x mandatory;
+	    scroll-behavior: smooth;
+	    -webkit-overflow-scrolling: touch;
+	  }
 
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+	  .slide {
+	    scroll-snap-align: start;
+	    flex-shrink: 0;
+	    width: 100px;
+	    height: 100px;
+	    background-size: contain;
+	    background-repeat: no-repeat;
+	    background-position: center;
+	    background-color: #fff;
+	    margin-right: 10px;
+	    border-radius: 10px;
+	    border: none;
+	    display: flex;
+	  }
+
+	  .slide.selected {
+	    border: 2px solid #4285f4;
+	  }
+
+	  .slide:focus {
+	    outline: none;
+	  }
+
+	  .slide:focus-visible {
+	    outline: 1px solid #4285f4;
+	  }
+
+	</style>
+	<!-- Import the component -->
+	<script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+	<script nomodule src="https://unpkg.com/@google/model-viewer/dist/model-viewer-legacy.js"></script>
+    </body>
+</html>
